@@ -51,10 +51,9 @@ public class HotelController {
 	IF_ChaService chasrv;
 	
 	
-	// 숙소등록 화면가ㅓ기
+	// 숙소등록 화면가기
 	@RequestMapping(value = "/join_hotel", method = RequestMethod.GET)
 	public String join_hotel(Locale locale, Model model) {
-
 		return "join_hotel";
 	}
 
@@ -70,9 +69,6 @@ public class HotelController {
 			cvo.setCharacter(hvo.getCharacter()[i]);
 			chaList.add(cvo);
 		}
-		//charactersrv.insert(chaList);
-		
-		
 		
 		String[] newName = filedatautil.fileUpload(file);
 		String mainImg = newName[0];
@@ -86,8 +82,7 @@ public class HotelController {
 	public String list_hotel(Locale locale, Model model, @RequestParam("category_hotel") String category)
 			throws Exception {
 		List<hotelVO> hlist = hotelsrv.hotel_selectAll(category);
-
-		System.out.println(hlist.get(0).getImg_hotel());
+//		System.out.println(hlist.get(0).getImg_hotel());
 		model.addAttribute("cList", hotelsrv.hotel_selectCategory());
 		model.addAttribute("hotelList", hlist);
 		model.addAttribute("cate", category);
@@ -100,8 +95,8 @@ public class HotelController {
 	public String detail_hotel(Locale locale, Model model, @RequestParam("detailAddr_hotel") String detailAddr_hotel,
 			@RequestParam("id_hotel") String id_hotel,HttpSession session) throws Exception {
 		LocalDate sysdate = LocalDate.now();
-	    sysdate = sysdate.plusDays(1);
-	    LocalDate sysdatePlus = sysdate.plusDays(1);
+	    sysdate = sysdate.plusDays(1);	//입실가능날짜 최소
+	    LocalDate sysdatePlus = sysdate.plusDays(1); // 퇴실가능날짜 최소
 	     
 	    //호텔 특징 가져와서 로그인된 유저의 특징테이블 카운팅해야함
 	    List<String> chaList_String = chasrv.select_cha_hotel(detailAddr_hotel);
@@ -115,14 +110,12 @@ public class HotelController {
 			chaList.add(cvo);
 		}
 	    chasrv.insert_count(chaList);
-	    
-	    
 	    model.addAttribute("sysdate",sysdate);
 	    model.addAttribute("sysdatePlus",sysdatePlus);
 		model.addAttribute("detailAddr_hotel", detailAddr_hotel);
 		model.addAttribute("id_hotel", id_hotel);
 		model.addAttribute("hotelvo", hotelsrv.hotel_selectDetailAddr(detailAddr_hotel));
-		System.out.println(hotelsrv.hotel_selectDetailAddr(detailAddr_hotel).getDetailAddr_hotel());
+//		System.out.println(hotelsrv.hotel_selectDetailAddr(detailAddr_hotel).getDetailAddr_hotel());
 		model.addAttribute("roomList", roomsrv.room_selectDetailAddr(detailAddr_hotel));
 		model.addAttribute("cList", hotelsrv.hotel_selectCategory());
 
@@ -202,7 +195,7 @@ public class HotelController {
 		String checkIn = request.getParameter("checkIn");
 		String checkOut = request.getParameter("checkOut");
 		String detailAddr = request.getParameter("detailAddr");
-		System.out.println(checkIn + "/" + checkOut + "/" + detailAddr);
+//		System.out.println(checkIn + "/" + checkOut + "/" + detailAddr);
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 		LocalDate date1 = LocalDate.parse(checkIn, formatter);
 		LocalDate date2 = LocalDate.parse(checkOut, formatter);
@@ -214,7 +207,7 @@ public class HotelController {
 			for (reservationVO resvo : resList) {
 				if (resvo.getCheckIn_res().compareTo(checkOut) >= 0
 						|| resvo.getCheckOut_res().compareTo(checkIn) <= 0) {
-					System.out.println("예약가능");
+//					System.out.println("예약가능");
 				} else {
 					a.add(resvo.getDetailAddr_roomNum_res());
 				}

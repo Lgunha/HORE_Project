@@ -72,7 +72,7 @@
 		target.disabled=true;
 	} 
 	
-	
+	//아이디 중복체크 버튼 클릭시 중복 확인 비동기 구현
 	$('#join_user_chk').click(function(){
       let ID = $('#id_user').val();
        

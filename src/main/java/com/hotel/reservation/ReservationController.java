@@ -88,51 +88,7 @@ public class ReservationController {
 //		      model.addAttribute("resList", ressrv.reservation_selectID(uvo.getId_user()));
 		      return "redirect:myPage";
 		}
-	//비동기) 예약 리스트  안겹치게 확인
-//	@RequestMapping("/CheckDate.do")
-//	   public @ResponseBody int midCheck(HttpServletRequest request) throws Exception {
-//	      String set = request.getParameter("set");
-//	      boolean flag = true;
-//	      SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-//	      
-//	      
-//	      String[] spl = set.split("/");
-//	      Date checkIn = formatter.parse(spl[0]);
-//	      Date checkOut = formatter.parse(spl[1]);
-//	      String detailAddr_roomNum = spl[2];
-//	      System.out.println(1);
-//	      List<reservationVO> resvoList = ressrv.reservation_selectAll(detailAddr_roomNum);
-//	      System.out.println(2);
-//	      if(resvoList.size()>0) {
-//	    	  System.out.println(3);
-//	    	  for(int i = 0 ; i < resvoList.size();i++) { 
-//	    		  String Res = resvoList.get(i).getCheckIn_res(); 
-//	    		  Date StartRes = formatter.parse(Res.split("/")[0]); 
-//	    		  Res = resvoList.get(i).getCheckOut_res();
-//	    		  Date EndRes = formatter.parse(Res.split("/")[0]); 
-//	    		  int checkInResult = checkIn.compareTo(EndRes); 
-//	    		  int checkOutResult = checkOut.compareTo(StartRes);
-//	    		  
-//	    		  if(checkInResult >= 0 || checkOutResult <= 0) { 
-//	    			  
-//	    		  } 
-//	    		  else { 
-//	    			  flag = false; 
-//	    		  }
-//	    		  
-//	    	  }
-//	    	  if(flag) { 
-//	    		  return 1; 
-//	    	  }
-//	    	  else { 
-//	    		  return 0; 
-//	    	  }
-//	     }else {
-//	    	 System.out.println(4);
-//	    	 return 1;
-//	     }
-//	      
-//	   }
+	
 	//예약 취소
 	@RequestMapping(value = "/reservation_delete", method = RequestMethod.GET)
 	   public String reservation_delete(Locale locale, Model model, @RequestParam("detailAddr_roomNum_res")String detailAddr_roomNum_res,

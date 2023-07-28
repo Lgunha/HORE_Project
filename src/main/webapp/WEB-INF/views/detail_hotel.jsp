@@ -286,7 +286,7 @@ function checkDate(){
        
     }
  }   
- 
+ //퇴실날짜 변경될 때 예약가능한방  + 총 예약 금액 변동 비동기 구현
 $('#checkOut_res').change(function(){
        let checkIn = $('#checkIn_res').val();
        let checkOut = $('#checkOut_res').val();

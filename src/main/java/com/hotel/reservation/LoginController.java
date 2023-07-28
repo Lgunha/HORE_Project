@@ -29,7 +29,7 @@ public class LoginController {
 	@Inject
 	IF_UserService usersrv;
 	
-	
+	//로그인 기능
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public String login(Locale locale, Model model, HttpSession session,
 			@RequestParam("id_user") String id_user) throws Exception{
@@ -45,7 +45,7 @@ public class LoginController {
 		
 		return "redirect:mainPage";
 	}
-	
+	//로그아웃 기능
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
 	public String login(Locale locale, Model model, HttpSession session) throws Exception{
 		session.invalidate();
