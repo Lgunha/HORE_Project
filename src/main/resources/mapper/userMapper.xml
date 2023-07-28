@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hotel.dao.IF_UserDAO">
+
+	<insert id="join_user_save" parameterType="com.hotel.VO.userVO">
+		insert into usertbl values(#{id_user},#{pw_user},#{name_user},#{tel_user},#{email_user},#{type_user},#{age_user})
+	</insert>
+
+	<select id="user_selectAll" resultType="com.hotel.VO.userVO" parameterType="String">
+		select * from usertbl
+		<where>
+ 		<if test="value != null">
+ 			id_user = #{value}
+ 		</if>
+ 		</where>
+	</select>
+	
+	<delete id = "delete_user" parameterType = "String">
+		delete from usertbl where id_user = #{id_user}
+	</delete>
+	
+	<update id ="update_user_save" parameterType="com.hotel.VO.userVO">
+		update usertbl set pw_user = #{pw_user}, name_user = #{name_user}, tel_user= #{tel_user}, email_user = #{email_user}
+		where id_user = #{id_user}
+	</update>
+	
+</mapper>

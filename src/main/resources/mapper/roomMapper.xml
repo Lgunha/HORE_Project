@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hotel.dao.IF_RoomDAO">
+		
+	<insert id="join_room_save" parameterType ="com.hotel.VO.roomVO" >
+		insert into roomtbl values (#{detailAddr_roomNum_room},#{detailAddr_room},#{roomNum_room},#{info_room},#{checkIn_room},#{checkOut_room},#{price_room})
+	</insert>
+
+	<select id= "room_selectDetailAddr" parameterType = "String" resultType = "com.hotel.VO.roomVO">
+		select * from roomtbl where detailAddr_room = #{detailAddr_room}
+	</select>
+
+	<select id="room_selectDetailAddr_roomNum" parameterType = "String" resultType = "com.hotel.VO.roomVO">
+		select * from roomtbl where detailAddr_roomNum_room = #{detailAddr_roomNum_room}
+	</select>
+	<update id="update_room_save" parameterType="com.hotel.VO.roomVO">
+		update roomtbl set info_room = #{info_room}, checkIn_room = #{checkIn_room}
+		,checkOut_room = #{checkOut_room} where detailAddr_roomNum_room = #{detailAddr_roomNum_room}
+	
+	</update>
+	
+	<delete id= "delete_room" parameterType = "String">
+		delete from roomtbl where detailAddr_roomNum_room = #{detailAddr_roomNum_room}
+	</delete>
+
+</mapper>

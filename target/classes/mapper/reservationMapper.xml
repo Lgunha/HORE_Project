@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hotel.dao.IF_ReservationDAO">
+
+	<insert id="reservation_save" parameterType="com.hotel.VO.reservationVO">
+		insert into reservationtbl values (#{id_res},#{detailAddr_roomNum_res},#{checkIn_res},#{checkOut_res},#{checkInDate},#{price_res})
+	</insert>
+	<select id="reservation_selectAll" resultType="com.hotel.VO.reservationVO" parameterType="String">
+      	select * from reservationtbl where detailAddr_roomNum_res = #{detailAddr_roomNum_res} order by checkInDate
+   	</select>
+	<select id="reservation_selectID" parameterType="String" resultType="com.hotel.VO.reservationVO">
+      select * from reservationtbl where id_res = #{id_res} order by detailAddr_roomNum_res, checkInDate
+   </select>
+	<select id="reservation_selectDetailAddr" resultType="com.hotel.VO.reservationVO" parameterType="String">
+		select * from reservationtbl where detailAddr_roomNum_res like '%${value}%' order by checkInDate
+	</select>
+	
+	<delete id="reservation_autoDelete">
+		delete from reservationtbl where checkInDate &lt;= sysdate
+	</delete>
+	<delete id="reservation_delete" parameterType="hashmap">
+		delete from reservationtbl where detailAddr_roomNum_res = #{detailAddr_roomNum_res} AND id_res = #{id_res} AND checkInDate = #{checkInDate}
+	</delete>
+	
+	
+	<insert id="do_reservation_autoSave" parameterType="com.hotel.VO.reservationVO">
+		insert into do_reservationtbl values (#{id_res},#{detailAddr_roomNum_res},#{checkIn_res},#{checkOut_res},#{checkInDate},#{price_res})
+	</insert>
+	<select id="do_reservation_select" resultType="com.hotel.VO.reservationVO">
+		select * from reservationtbl where checkInDate &lt;= sysdate
+	</select>
+	
+</mapper>
